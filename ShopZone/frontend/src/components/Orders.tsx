@@ -209,7 +209,7 @@ const Orders = ({results}: Props ) => {
                             <Link
                                 to={`/order/${o.id}`}
                                 >
-                            See
+                            Ver
                             </Link>
                         </td>
 
@@ -217,7 +217,7 @@ const Orders = ({results}: Props ) => {
                             <Link
                                 to={`/order/${o.id}`}
                                 >
-                            See
+                            Ver
                             </Link>
                         </td>
 
