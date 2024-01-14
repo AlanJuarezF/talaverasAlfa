@@ -78,7 +78,7 @@ const CartPage = () => {
                                 <div className="flex items-center flex-1 space-x-4">
                                     <h5>
                                         <span className="text-gray-300 text-xl font-bold">
-                                            Products in you cart: {cart.length}
+                                            Productos en tu carrito: {cart.length}
                                         </span>
                                     </h5>
                                     <h5>

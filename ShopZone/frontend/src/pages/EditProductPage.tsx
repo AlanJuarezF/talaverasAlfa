@@ -46,7 +46,7 @@ const EditProductPage = () => {
         mutationFn: edit_product,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["products"] });
-            toast.success("Product edited!")
+            toast.success("Producto editado!")
             navigate('/admin')
         },
         onError: () => {
@@ -126,7 +126,7 @@ const EditProductPage = () => {
                     <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
                         <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
                             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                Edit Product
+                                Editar Producto
                             </h3>
                             <Link
                                 to="/admin"

@@ -135,7 +135,7 @@ const UserProfile = () => {
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="px-4 py-3">Order ID</th>
-            <th scope="col" className="px-4 py-3">See</th>
+            <th scope="col" className="px-4 py-3">Ver</th>
           </tr>
         </thead>
 
@@ -149,7 +149,7 @@ const UserProfile = () => {
                 <Link 
                 to={`/order/${order.id}/`}
                 className="p-2 cursor-pointer rounded-lg bg-gray-900 hover:bg-gray-700">
-                    See
+                    Ver
                 </Link>
               </td>
             </tr>
