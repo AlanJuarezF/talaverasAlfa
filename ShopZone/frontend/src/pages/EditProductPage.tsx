@@ -5,6 +5,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { Product } from "../Interfaces";
 
+const categories = [
+    "Domesticos",
+    "Decoración",
+    "Lujo y cocina",
+];
+
 const EditProductPage = () => {
 
     const [editedField, setEditedField] = useState('');
@@ -52,10 +58,10 @@ const EditProductPage = () => {
         setEditedField('name');
       }
 
-        const handleCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
-            setCategory(e.target.value);
-            setEditedField('category');
-        }
+      const handleCategoryChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        setCategory(e.target.value);
+        setEditedField('category');
+    }
 
         const handleDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
             setDescription(e.target.value);
@@ -311,7 +317,21 @@ const EditProductPage = () => {
                                     >
                                         Categoria
                                     </label>
-                                    <input
+                                    <select
+                                        value={category}
+                                        onChange={handleCategoryChange}
+                                        id="category"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    >
+                                        <option value="">Selecciona una categoría</option>
+                                        {categories.map(cat => (
+                                            <option key={cat} value={cat}>
+                                                {cat}
+                                            </option>
+                                        ))}
+
+                                    </select>
+                                    {/* <input
                                         value={category}
                                         onChange={handleCategoryChange}
                                         type="text"
@@ -319,7 +339,7 @@ const EditProductPage = () => {
                                         id="category"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                         placeholder="Category"
-                                    />
+                                    /> */}
                                 </div>
 
                                 <div className="sm:col-span-2">
