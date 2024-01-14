@@ -4,6 +4,12 @@ import { post_product } from "../api/products";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
+const categories = [
+    "Domesticos",
+    "Decoración",
+    "Lujo y cocina",
+];
+
 const AddProductPage = () => {
 
     const [name, setName] = useState<string>("");
@@ -15,7 +21,7 @@ const AddProductPage = () => {
     const [filePreview, setFilePreview] = useState<string>("");
     const inputRef = React.useRef<HTMLInputElement>(null);
     const [isHovered, setIsHovered] = useState(false);
-    
+
     const navigate = useNavigate()
     const queryClient = useQueryClient();
 
@@ -44,13 +50,16 @@ const AddProductPage = () => {
         });
     };
 
+    const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setCategory(e.target.value);
+      };
     const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
     };
 
-    const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setCategory(event.target.value);
-    };
+    // const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>) => {
+    //     setCategory(event.target.value);
+    // };
 
     const handleDescriptionChange = (event: ChangeEvent<HTMLInputElement>) => {
         setDescription(event.target.value);
@@ -187,7 +196,21 @@ const AddProductPage = () => {
                                     >
                                         Categorias
                                     </label>
-                                    <input
+                                    <select
+                                        value={category}
+                                        onChange={handleCategoryChange}
+                                        id="category"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    >
+                                        <option value="">Selecciona una categoría</option>
+                                        {categories.map(cat => (
+                                            <option key={cat} value={cat}>
+                                                {cat}
+                                            </option>
+                                        ))}
+
+                                    </select>
+                                    {/* <input
                                         value={category}
                                         onChange={handleCategoryChange}
                                         type="text"
@@ -195,7 +218,7 @@ const AddProductPage = () => {
                                         id="category"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                         placeholder="Category"
-                                    />
+                                    /> */}
                                 </div>
 
                                 <div className="sm:col-span-2">
@@ -221,9 +244,8 @@ const AddProductPage = () => {
                                                 htmlFor="dropzone-file"
                                                 className={`flex flex-col items-center justify-center w-full h-64 
         border-2 border-gray-600 border-dashed rounded-lg 
-        cursor-pointer bg-gray-40 ${
-            isHovered ? "bg-gray-600" : "hover:bg-gray-600"
-        }`}
+        cursor-pointer bg-gray-40 ${isHovered ? "bg-gray-600" : "hover:bg-gray-600"
+                                                    }`}
                                                 onDragEnter={handleDragEnter}
                                                 onDragLeave={handleDragLeave}
                                             >
