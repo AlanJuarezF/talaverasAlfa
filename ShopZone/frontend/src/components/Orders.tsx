@@ -54,25 +54,25 @@ const Orders = ({results}: Props ) => {
                             </div>
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Order id
+                            Orden id
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Created at
+                            Creada
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Delivered at
+                            Entregada
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            User
+                            Usuario
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Total Price
+                        Precio Total 
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Products
+                            Productos
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Shipping Address
+                            Direccion de envio
                         </th>
 
                     </tr>
@@ -134,7 +134,7 @@ const Orders = ({results}: Props ) => {
                             <Link
                                 to={`/order/${o.id}`}
                                 >
-                            See
+                            Ver
                             </Link>
                         </td>
 
@@ -142,7 +142,7 @@ const Orders = ({results}: Props ) => {
                             <Link
                                 to={`/order/${o.id}`}
                                 >
-                            See
+                            Ver
                             </Link>
                         </td>
 

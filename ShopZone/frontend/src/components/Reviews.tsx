@@ -79,7 +79,7 @@ const Reviews = ({productId, reviews}: Props) => {
                                         htmlFor="name"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >
-                                        Description
+                                        Descripción
                                     </label>
                                     <input
                                         value={description}
@@ -128,7 +128,7 @@ const Reviews = ({productId, reviews}: Props) => {
                                         clip-rule="evenodd"
                                     ></path>
                                 </svg>
-                                    Create Review
+                                    Crear Review
                             </button>
                         </form>
                     </div>
@@ -150,7 +150,7 @@ const Reviews = ({productId, reviews}: Props) => {
                             setShow(true)
                         }}
                         className="inline-flex items-center mx-3 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        >Create a review</button>
+                        >Crear a review</button>
                     </div>
                 </div>
             </section>

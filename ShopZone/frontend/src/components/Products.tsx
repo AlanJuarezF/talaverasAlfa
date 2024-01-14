@@ -59,25 +59,25 @@ const Products = ({ results }: Props) => {
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" className="px-4 py-3">
-                            Product ID
+                            Producto ID
                         </th>
                         <th scope="col" className="px-4 py-3">
-                            Name
-                        </th>
-
-                        <th scope="col" className="px-4 py-3">
-                            Price
+                            Nombre
                         </th>
 
                         <th scope="col" className="px-4 py-3">
-                            Count in stock
+                            Precio
+                        </th>
+
+                        <th scope="col" className="px-4 py-3">
+                            Cantidad en stock
                         </th>
 
                         <th
                             scope="col"
                             className="px-4 py-3 flex justify-center gap-4"
                         >
-                            Actions
+                            Acciones
                             <Link to="add">
                                 <AiFillPlusSquare
                                     size={22}
@@ -201,7 +201,7 @@ const Products = ({ results }: Props) => {
 
                                 {!isLoading && data?.pages.length === 0 && (
                                     <p className="text-xl text-slate-800 dark:text-slate-200">
-                                        No more results
+                                        No mas resultados
                                     </p>
                                 )}
                                 {!isLoading &&

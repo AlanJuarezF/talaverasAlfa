@@ -39,22 +39,22 @@ const Users = ({results}: Props) => {
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" className="px-4 py-3">
-                            Users ID
+                            Usuario ID
                         </th>
                         <th scope="col" className="px-4 py-3">
-                            Email
+                            Correo
                         </th>
                         <th scope="col" className="px-4 py-3">
-                            Name
+                            Nombre
                         </th>
                         <th scope="col" className="px-4 py-3">
-                            Last Name
+                            Apellidos
                         </th>
                         <th
                             scope="col"
                             className="px-4 py-3 flex items-center justify-center gap-4"
                         >
-                            Actions
+                            Acciones
                         </th>
                     </tr>
                 </thead>
