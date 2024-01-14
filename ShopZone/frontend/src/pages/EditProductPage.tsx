@@ -29,14 +29,14 @@ const EditProductPage = () => {
     })
 
     useEffect(() => {
-       if (data) {
-        setName(data.name)
-        setCountInStock(data.count_in_stock)
-        setDescription(data.description)
-        setCategory(data.category)
-        setPrice(data.price)
-        setImage(data.image)
-       }
+        if (data) {
+            setName(data.name)
+            setCountInStock(data.count_in_stock)
+            setDescription(data.description)
+            setCategory(data.category)
+            setPrice(data.price)
+            setImage(data.image)
+        }
     }, [data])
 
     const navigate = useNavigate()
@@ -246,9 +246,8 @@ const EditProductPage = () => {
                                                 htmlFor="dropzone-file"
                                                 className={`flex flex-col items-center justify-center w-full h-64 
         border-2 border-gray-600 border-dashed rounded-lg 
-        cursor-pointer bg-gray-40 ${
-            isHovered ? "bg-gray-600" : "hover:bg-gray-600"
-        }`}
+        cursor-pointer bg-gray-40 ${isHovered ? "bg-gray-600" : "hover:bg-gray-600"
+                                                    }`}
                                                 onDragEnter={handleDragEnter}
                                                 onDragLeave={handleDragLeave}
                                             >
