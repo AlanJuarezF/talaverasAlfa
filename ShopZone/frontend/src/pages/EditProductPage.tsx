@@ -3,8 +3,11 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { edit_product, get_solo_prod } from "../api/products";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { Product } from "../Interfaces";
 
 const EditProductPage = () => {
+
+    const [editedField, setEditedField] = useState('');
 
     const [name, setName] = useState<string>("");
     const [countInStock, setCountInStock] = useState<number>(0);
@@ -15,6 +18,8 @@ const EditProductPage = () => {
     const [filePreview, setFilePreview] = useState<string>("");
     const inputRef = React.useRef<HTMLInputElement>(null);
     const [isHovered, setIsHovered] = useState(false);
+
+    
 
     const { id } = useParams();
     let prodId: number;
@@ -42,80 +47,174 @@ const EditProductPage = () => {
     const navigate = useNavigate()
     const queryClient = useQueryClient();
 
-    const editProdMutation = useMutation({
-        mutationFn: edit_product,
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["products"] });
-            toast.success("Producto editado!")
-            navigate('/admin')
-        },
-        onError: () => {
-            toast.error("Error!")
-            navigate('/admin')
-        },
-    });
+    const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setName(e.target.value);
+        setEditedField('name');
+      }
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        editProdMutation.mutate({
-            name: name,
-            count_in_stock: countInStock,
-            category: category,
-            description: description,
-            price: price,
-            image: image,
-            id: prodId
-        });
-    };
-
-    const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setName(event.target.value);
-    };
-
-    const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setCategory(event.target.value);
-    };
-
-    const handleDescriptionChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setDescription(event.target.value);
-    };
-
-    const handleCountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newNumber = parseInt(event.target.value, 10);
-        setCountInStock(newNumber);
-    };
-
-    const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newNumber = parseInt(event.target.value, 10);
-        setPrice(newNumber);
-    };
-
-    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files && event.target.files[0];
-        if (file) {
-            setImage(file);
-            const reader = new FileReader();
-            reader.onload = () => {
-                setFilePreview(reader.result as string);
-            };
-            reader.readAsDataURL(file);
+        const handleCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
+            setCategory(e.target.value);
+            setEditedField('category');
         }
-    };
 
-    const handleDragEnter = (event: React.DragEvent<HTMLLabelElement>) => {
-        event.preventDefault();
-        setIsHovered(true);
-    };
+        const handleDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+            setDescription(e.target.value);
+            setEditedField('description');
+        }
 
-    const handleDragLeave = (event: React.DragEvent<HTMLLabelElement>) => {
-        event.preventDefault();
-        setIsHovered(false);
-    };
+        const handleCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+            const newNumber = parseInt(e.target.value, 10);
+            setCountInStock(newNumber);
+            setEditedField('count_in_stock');
+        }
 
-    const removeImage = () => {
-        setImage(null);
-        setIsHovered(false);
-    };
+        const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+            const newNumber = parseInt(e.target.value, 10);
+            setPrice(newNumber);
+            setEditedField('price');
+        }
+
+        const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+            const file = e.target.files && e.target.files[0];
+            if (file) {
+                setImage(file);
+                const reader = new FileReader();
+                reader.onload = () => {
+                    setFilePreview(reader.result as string);
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+
+        const handleDragEnter = (e: React.DragEvent<HTMLLabelElement>) => {
+            e.preventDefault();
+            setIsHovered(true);
+        };
+
+        const handleDragLeave = (e: React.DragEvent<HTMLLabelElement>) => {
+            e.preventDefault();
+            setIsHovered(false);
+        };
+
+        const removeImage = () => {
+            setImage(null);
+            setIsHovered(false);
+        };
+
+        const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            const updatedProduct: Product = {
+                name,
+                description,
+                price,
+                count_in_stock: countInStock,
+                category,
+                image: null,
+                id: prodId
+            };
+
+            if (editedField === 'name') {
+                updatedProduct.name = name
+            } 
+
+            if (editedField === 'category') {
+                updatedProduct.category = category
+            } 
+
+            if (editedField === 'description') {
+                updatedProduct.description = description
+            } 
+
+            if (editedField === 'count_in_stock') {
+                updatedProduct.count_in_stock = countInStock
+            } 
+
+            if (editedField === 'price') {
+                updatedProduct.price = price
+            } 
+
+            if (editedField === 'image') {
+                updatedProduct.image = image
+            } 
+
+            editProdMutation.mutate(updatedProduct);
+
+        }
+
+     const editProdMutation = useMutation({
+         mutationFn: edit_product,
+         onSuccess: () => {
+             queryClient.invalidateQueries({ queryKey: ["products"] });
+             toast.success("Producto editado!")
+             navigate('/admin')
+         },
+         onError: () => {
+             toast.error("Error!")
+             navigate('/admin')
+         },
+     });
+
+    // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    //     event.preventDefault();
+    //     editProdMutation.mutate({
+    //         name: name,
+    //         count_in_stock: countInStock,
+    //         category: category,
+    //         description: description,
+    //         price: price,
+    //         image: image,
+    //         id: prodId
+    //     });
+    // };
+
+    // const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    //     setName(event.target.value);
+    // };
+
+    // const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>) => {
+    //     setCategory(event.target.value);
+    // };
+
+    // const handleDescriptionChange = (event: ChangeEvent<HTMLInputElement>) => {
+    //     setDescription(event.target.value);
+    // };
+
+    // const handleCountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     const newNumber = parseInt(event.target.value, 10);
+    //     setCountInStock(newNumber);
+    // };
+
+    // const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     const newNumber = parseInt(event.target.value, 10);
+    //     setPrice(newNumber);
+    // };
+
+    // const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    //     const file = event.target.files && event.target.files[0];
+    //     if (file) {
+    //         setImage(file);
+    //         const reader = new FileReader();
+    //         reader.onload = () => {
+    //             setFilePreview(reader.result as string);
+    //         };
+    //         reader.readAsDataURL(file);
+    //     }
+    // };
+
+    // const handleDragEnter = (event: React.DragEvent<HTMLLabelElement>) => {
+    //     event.preventDefault();
+    //     setIsHovered(true);
+    // };
+
+    // const handleDragLeave = (event: React.DragEvent<HTMLLabelElement>) => {
+    //     event.preventDefault();
+    //     setIsHovered(false);
+    // };
+
+    // const removeImage = () => {
+    //     setImage(null);
+    //     setIsHovered(false);
+    // };
 
     if (editProdMutation.isLoading) return <p>Loader....</p>
 
